@@ -1,0 +1,42 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+        .app{
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            .header{
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                justify-items: center;
+                h1{
+                    width: 90%;
+                    text-align: center;
+                }
+            }
+            .former{
+                width: 100%;
+                display: flex;
+                justify-content: space-around;
+                form{
+                    width: 70%;
+                }
+            }
+            
+            .photo-wrap{
+                margin-top: 20px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .photo{
+                    width: 80vw;
+                }
+            }
+            
+        }
+        
+}
