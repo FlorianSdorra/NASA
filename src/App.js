@@ -19,7 +19,7 @@ class App extends React.Component {
     const apiKey = 'YBS2CdMoplI1ogI0sqritMTlJ2ibap9RLzKmR8SX';
     fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`) 
     .then(response => response.json())
-    .then(json => this.setState({ photo: json, info: json }))
+    .then(json => this.setState({ photo: json}))
     console.log(this.state)
   }
 
@@ -33,7 +33,16 @@ class App extends React.Component {
         date: dateFromInput
       }
     )
+    this.getPhoto(dateFromInput)
   };
+
+  getPhoto = date => {
+    fetch(`https://api.nasa.gov/planetary/apod?date=${date}&api_key=DEMO_KEY`)
+      .then(response => response.json())
+      .then(photoData => this.setState({ photo: photoData }));
+  };
+
+
   render(){
     return (
       <div className="app">

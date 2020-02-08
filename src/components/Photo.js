@@ -5,10 +5,11 @@ import React from 'react';
 class Photo extends React.Component{
     
     render(){
-        const {url, date} = this.props.data
-        console.log(this.props.data)
+        const {url, date, title} = this.props.data
+        console.log(this.props)
         return(
             <div className="photo-wrap" >
+                <h2>{title}</h2>
             <img className="photo" src={url} alt={date}></img>
         </div>
         )
