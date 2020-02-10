@@ -6,7 +6,6 @@ class Photo extends React.Component{
     
     render(){
         const {url, date, title} = this.props.data
-        console.log(this.props)
         return(
             <div className="photo-wrap" >
                 <h2>{title}</h2>

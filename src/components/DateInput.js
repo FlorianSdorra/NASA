@@ -6,12 +6,11 @@ import "react-datepicker/dist/react-datepicker.css";
 const DateInput = props => (
   <div className="former">
     <form >
-      <p>Enter a date:</p>
       <DatePicker
-      selected={props.date}
       onChange={props.changeDate}
-      format='yyyy-MM-dd'
+      placeholder="enter date"
       />
+      <p>enter a date and show the picture from space regarding your entered date</p>
     </form>
   </div>
   

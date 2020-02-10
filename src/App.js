@@ -9,18 +9,20 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: "",
+      date: this.formatDate(moment()),
       photo:"",
     };
-    this.changeDate = this.changeDate.bind(this);
-    this.formatDate = this.formatDate.bind(this);
   }
 
+  theKey = () => {
+    return 'YBS2CdMoplI1ogI0sqritMTlJ2ibap9RLzKmR8SX';
+  }
+  
   componentDidMount=()=>{
-    const apiKey = 'YBS2CdMoplI1ogI0sqritMTlJ2ibap9RLzKmR8SX';
-    fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`) 
+    fetch(`https://api.nasa.gov/planetary/apod?api_key=${this.theKey()}`) 
     .then(response => response.json())
-    .then(json => this.setState({ photo: json}))
+    .then(json => this.setState({ photo: json}));
+    console.log(this.state.date)
   }
 
   formatDate = input => {
@@ -30,10 +32,13 @@ class App extends React.Component {
 
   changeDate = value => {
     this.getPhoto(this.formatDate(value));
+    this.setState({
+      date: this.formatDate(value)
+    })
     };
 
   getPhoto = date => {
-    fetch(`https://api.nasa.gov/planetary/apod?date=${date}&api_key=DEMO_KEY`)
+    fetch(`https://api.nasa.gov/planetary/apod?date=${date}&api_key=${this.theKey()}`)
       .then(response => response.json())
       .then(photoData => this.setState({ photo: photoData }));
   };
@@ -44,8 +49,9 @@ class App extends React.Component {
       <div className="app">
         <header className="header">
           <h1>NASA's Astronomy Picture of the Day</h1>
+          <div></div>
         </header>
-        <DateInput changeDate={this.changeDate} date={this.state.date}></DateInput>
+        <DateInput changeDate={this.changeDate} date={this.date}></DateInput>
         <Photo data={this.state.photo}></Photo>
         <InfoPart data={this.state.photo}></InfoPart>
       </div>
