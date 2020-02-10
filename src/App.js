@@ -3,16 +3,17 @@ import './style/App.scss';
 import DateInput from './components/DateInput';
 import Photo from './components/Photo';
 import InfoPart from './components/InfoPart';
-
+import moment from 'moment';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      date:"",
+      date: "",
       photo:"",
     };
-    this.changeDate = this.changeDate.bind(this)
+    this.changeDate = this.changeDate.bind(this);
+    this.formatDate = this.formatDate.bind(this);
   }
 
   componentDidMount=()=>{
@@ -20,21 +21,16 @@ class App extends React.Component {
     fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`) 
     .then(response => response.json())
     .then(json => this.setState({ photo: json}))
-    console.log(this.state)
   }
 
- 
+  formatDate = input => {
+    const res = moment(input).format("").slice(0,10);
+    return res
+  }
 
-  changeDate = e => {
-    e.preventDefault();
-    var dateFromInput = e.target[0].value
-    this.setState(
-      {
-        date: dateFromInput
-      }
-    )
-    this.getPhoto(dateFromInput)
-  };
+  changeDate = value => {
+    this.getPhoto(this.formatDate(value));
+    };
 
   getPhoto = date => {
     fetch(`https://api.nasa.gov/planetary/apod?date=${date}&api_key=DEMO_KEY`)
@@ -49,7 +45,7 @@ class App extends React.Component {
         <header className="header">
           <h1>NASA's Astronomy Picture of the Day</h1>
         </header>
-        <DateInput changeDate={this.changeDate}></DateInput>
+        <DateInput changeDate={this.changeDate} date={this.state.date}></DateInput>
         <Photo data={this.state.photo}></Photo>
         <InfoPart data={this.state.photo}></InfoPart>
       </div>
